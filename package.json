@@ -6,7 +6,8 @@
     "lint": "eslint .",
     "test": "jest",
     "coverage": "jest --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -23,14 +24,18 @@
     "@babel/cli": "^8.0.4",
     "@babel/core": "^8.0.1",
     "@babel/preset-env": "^8.0.2",
+    "@babel/preset-typescript": "^8.0.1",
     "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
+    "@types/node": "^22.20.2",
     "babel-loader": "^10.1.1",
     "babel-plugin-polyfill-corejs3": "^1.0.0",
     "eslint": "^10.10.0",
     "globals": "^17.11.0",
     "husky": "^9.1.7",
     "jest": "^30.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3",
     "webpack": "^5.110.3",
     "webpack-cli": "^7.2.3"
   },

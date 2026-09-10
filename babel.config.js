@@ -1,11 +1,11 @@
 export default {
-  presets: ['@babel/preset-env'],
+  presets: ["@babel/preset-env", "@babel/preset-typescript"],
 
   plugins: [
     [
-      'polyfill-corejs3',
+      "polyfill-corejs3",
       {
-        method: 'entry-global',
+        method: "usage-global",
       },
     ],
   ],
