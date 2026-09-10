@@ -1,0 +1,40 @@
+{
+  "name": "PROJECT-NAME",
+  "scripts": {
+    "prod": "webpack --mode=production",
+    "dev": "webpack --mode=development",
+    "lint": "eslint .",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potykalov/PROJECT-NAME.git"
+  },
+  "author": "Dmitriy Potykalov <dmitriy.potykalov@gmail.com> (https://github.com/potykalov)",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/potykalov/PROJECT-NAME/issues"
+  },
+  "homepage": "https://github.com/potykalov/PROJECT-NAME#readme",
+  "devDependencies": {
+    "@babel/cli": "^8.0.4",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "@eslint/js": "^10.0.1",
+    "@types/jest": "^30.0.0",
+    "babel-loader": "^10.1.1",
+    "babel-plugin-polyfill-corejs3": "^1.0.0",
+    "eslint": "^10.8.1",
+    "globals": "^17.11.0",
+    "husky": "^9.1.7",
+    "jest": "^30.4.2",
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.2.2"
+  },
+  "dependencies": {
+    "core-js": "^3.50.0"
+  }
+}
