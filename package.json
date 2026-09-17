@@ -23,7 +23,7 @@
   "homepage": "https://github.com/potykalov/PROJECT-NAME#readme",
   "devDependencies": {
     "@babel/cli": "^8.0.4",
-    "@babel/core": "^8.0.1",
+    "@babel/core": "^8.0.5",
     "@babel/preset-env": "^8.0.2",
     "@babel/preset-typescript": "^8.0.1",
     "@eslint/js": "^10.0.1",
