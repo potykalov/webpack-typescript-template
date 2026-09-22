@@ -1,13 +1,22 @@
-# Webpack Template
+# Webpack + TypeScript Template
 
-[![Node.js CI](https://github.com/potykalov/webpack-template/actions/workflows/node-ci.yml/badge.svg)](https://github.com/potykalov/webpack-template/actions/workflows/node-ci.yml)
-[![CodeQL](https://github.com/potykalov/webpack-template/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/potykalov/webpack-template/actions/workflows/github-code-scanning/codeql)
-[![Dependabot Updates](https://github.com/potykalov/webpack-template/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/potykalov/webpack-template/actions/workflows/dependabot/dependabot-updates)
+[![Node.js CI](https://github.com/potykalov/webpack-typescript-template/actions/workflows/node-ci.yml/badge.svg)](https://github.com/potykalov/webpack-typescript-template/actions/workflows/node-ci.yml)
 
-Шаблон JavaScript-проекта с готовым окружением для сборки, тестирования, линтинга и автоматических проверок.
+Шаблон учебного проекта на TypeScript с настроенным окружением для разработки, сборки, проверки типов, тестирования и автоматических проверок.
 
-Репозиторий настроен как **GitHub Template Repository** и предназначен для быстрого создания новых учебных JavaScript-проектов.
+Репозиторий настроен как **GitHub Template Repository** и предназначен для быстрого создания новых учебных проектов на TypeScript.
 
+## Возможности
+
+- **TypeScript 6** — статическая типизация и проверка типов с помощью `tsc`.
+- **Webpack 5** — сборка проекта в режимах разработки и production.
+- **Babel 8** — преобразование TypeScript и JavaScript.
+- **Jest 30** — тестирование и формирование отчётов о покрытии.
+- **ESLint 10** — статический анализ JavaScript-файлов.
+- **Husky 9** — запуск проверок перед коммитом.
+- **GitHub Actions** — автоматический запуск тестов, линтера, проверки типов и production-сборки.
+- **Dependabot** — проверка обновлений зависимостей.
+- **CodeQL** — автоматический анализ безопасности через GitHub.
 ## Инструменты
 
 - **Webpack 5** — development- и production-сборка
