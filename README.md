@@ -2,183 +2,98 @@
 
 [![Node.js CI](https://github.com/potykalov/webpack-typescript-template/actions/workflows/node-ci.yml/badge.svg)](https://github.com/potykalov/webpack-typescript-template/actions/workflows/node-ci.yml)
 
-Шаблон учебного проекта на TypeScript с настроенным окружением для разработки, сборки, проверки типов, тестирования и автоматических проверок.
+Учебный шаблон TypeScript-проекта с настроенными сборкой, локальным сервером разработки, проверкой типов и автоматическими проверками. Репозиторий отмечен как **GitHub Template Repository**: его можно использовать для создания новых проектов.
 
-Репозиторий настроен как **GitHub Template Repository** и предназначен для быстрого создания новых учебных проектов на TypeScript.
+В `src/app.ts` пока нет логики приложения, а тестовые файлы отсутствуют. Шаблон предоставляет окружение, а не готовое приложение или подтверждённое тестовое покрытие.
 
 ## Возможности
 
-- **TypeScript 6** — статическая типизация и проверка типов с помощью `tsc`.
-- **Webpack 5** — сборка проекта в режимах разработки и production.
-- **Babel 8** — преобразование TypeScript и JavaScript.
-- **Jest 30** — тестирование и формирование отчётов о покрытии.
-- **ESLint 10** — статический анализ JavaScript-файлов.
-- **Husky 9** — запуск проверок перед коммитом.
-- **GitHub Actions** — автоматический запуск тестов, линтера, проверки типов и production-сборки.
-- **Dependabot** — проверка обновлений зависимостей.
-- **CodeQL** — автоматический анализ безопасности через GitHub.
-## Инструменты
-
-- **Webpack 5** — development- и production-сборка
-- **Babel 8** — транспиляция JavaScript
-- **Core-js** — полифиллы
-- **Jest 30** — тестирование и покрытие кода
-- **ESLint 10** — статический анализ кода
-- **Husky 9** — pre-commit проверки
-- **GitHub Actions** — CI
-- **Dependabot** — обновление зависимостей
-- **CodeQL** — анализ безопасности через GitHub default setup
-- **Browserslist** — настройка поддержки браузеров
-- **EditorConfig** — единый стиль файлов
-- **Prettier ignore** — исключения для форматирования в Prettier, в том числе через расширение VS Code
-- **Git attributes** — нормализация текстовых файлов
+- **TypeScript 6** — статическая типизация; проверка исходного кода через `tsc --noEmit`.
+- **Webpack 5** и **webpack-dev-server** — сборка и локальный сервер разработки.
+- **Babel 8** с `@babel/preset-env` и `@babel/preset-typescript` — преобразование JavaScript и TypeScript при сборке.
+- **core-js** — полифиллы; **Browserslist** — настройки целевых браузеров.
+- **Jest 30** — запуск тестов; в текущей конфигурации сбор покрытия настроен для JavaScript-файлов.
+- **ESLint 10** — проверка JavaScript-файлов (`.js`, `.mjs`, `.cjs`), но не TypeScript-файлов.
+- **Husky 9** — запуск тестов, ESLint и проверки типов перед коммитом.
+- **GitHub Actions** — автоматическая проверка тестов, JavaScript-кода, типов и production-сборки.
+- **Dependabot** — проверка обновлений npm-зависимостей и GitHub Actions.
+- **CodeQL** — анализ безопасности, включённый в этом репозитории через GitHub default setup.
+- **EditorConfig** и **Git attributes** — единые правила оформления файлов и нормализация окончаний строк.
 
 ## Требования
 
-- Node.js 26
-- npm
+- Node.js 26 (эта версия используется в CI).
+- npm.
 
-## Использование
+## Создание проекта и запуск
 
-Нажмите **Use this template → Create a new repository** на странице репозитория.
-
-После создания нового проекта клонируйте его:
+1. На странице репозитория выберите **Use this template → Create a new repository**.
+2. Клонируйте созданный репозиторий и установите зависимости:
 
 ```bash
 git clone https://github.com/USERNAME/PROJECT-NAME.git
 cd PROJECT-NAME
-```
-
-Установите зависимости:
-
-```bash
 npm install
 ```
 
-После этого замените `PROJECT-NAME` в `package.json` на имя нового проекта и обновите:
+3. Замените `PROJECT-NAME` в `package.json` на название своего проекта и актуализируйте поля `repository.url`, `bugs.url` и `homepage`.
+4. Запустите сервер разработки:
 
-- `repository.url`
-- `bugs.url`
-- `homepage`
-
-Основная точка входа:
-
-```text
-src/index.js
+```bash
+npm start
 ```
+
+Сервер настроен на порт `8080` и автоматически открывает страницу в браузере. Основная точка входа — `src/index.ts`; файл `src/app.ts` предназначен для логики приложения. Конфигурация сборки находится в `webpack.config.ts`.
 
 ## Команды
 
 | Команда | Назначение |
 | --- | --- |
+| `npm start` | Запуск локального сервера разработки |
 | `npm run dev` | Development-сборка |
-| `npm run prod` | Production-сборка |
+| `npm run prod` | Production-сборка в `dist/` |
+| `npm run typecheck` | Проверка типов исходного кода командой `tsc --noEmit` |
 | `npm test` | Запуск Jest |
-| `npm run coverage` | Запуск Jest с отчётом о покрытии |
-| `npm run lint` | Проверка ESLint |
+| `npm run coverage` | Запуск Jest с формированием отчёта о покрытии |
+| `npm run lint` | Проверка JavaScript-файлов с помощью ESLint |
 
-Production-сборка создаётся в директории `dist/`.
+## TypeScript и сборка
+
+- `tsconfig.json` включает строгую проверку (`strict: true`) исходного кода в `src/`. Команда `npm run typecheck` использует эту конфигурацию.
+- `tsconfig.webpack.json` содержит отдельные настройки типов для `webpack.config.ts`. Текущий скрипт `typecheck` **не запускает** отдельную проверку этой конфигурации.
+- `webpack.config.ts` обрабатывает `.ts` и `.js` через Babel, а также подключает HTML, CSS, изображения и шрифты.
+- `src/global.d.ts` содержит объявление модуля для импорта CSS-файлов.
+- `src/app.ts` и `src/css/style.css` — пустые заготовки для будущего проекта.
+
+Babel преобразует TypeScript при сборке, но не заменяет проверку типов. Для проверки типов отдельно используется TypeScript.
 
 ## Тестирование
 
-Jest собирает покрытие для JavaScript-файлов внутри `src/`, исключая тестовые файлы из `__tests__`.
+В `jest.config.js` включены очистка моков перед тестами (`clearMocks`), подробный вывод (`verbose`) и каталог отчётов `coverage/`.
 
-Для покрытия строк установлен глобальный порог:
+Покрытие настроено для `src/**/*.js` с исключением `__tests__`; TypeScript-файлы в текущем `collectCoverageFrom` не указаны. Глобальный порог покрытия строк задан как **100%** — это требование конфигурации, **не фактически достигнутый показатель**.
 
-```text
-100%
-```
+Сам шаблон не содержит тестов. До их добавления обычный запуск `npm test` завершается сообщением `No tests found`. В pre-commit проверке используется `--passWithNoTests`, а CI пропускает этап покрытия, если тесты не обнаружены.
 
-Названия отдельных тестов выводятся благодаря `verbose: true`.
+## Проверки перед коммитом и CI
 
-Сам шаблон не содержит тестов. Обычный запуск:
+Файл `.husky/pre-commit` запускает:
 
 ```bash
-npm test
+npm test -- --passWithNoTests && npm run lint && npm run typecheck
 ```
 
-завершится сообщением `No tests found`, пока в проект не будет добавлен хотя бы один тест.
+Workflow [Node.js CI](.github/workflows/node-ci.yml) запускается при `push` и `pull_request` в ветку `main`. Он выполняет `npm ci`, проверяет наличие тестов, запускает покрытие при наличии тестов, затем выполняет `npm run lint`, `npm run typecheck` и `npm run prod`.
 
-Для Husky и CI отсутствие тестов обработано отдельно, чтобы пустой template repository мог проходить автоматические проверки.
+В GitHub Actions установлена переменная `HUSKY=0`, поскольку проверки запускаются отдельными шагами workflow.
 
-## Husky
+## Обновления зависимостей и безопасность
 
-Перед каждым коммитом выполняются:
+[Dependabot](.github/dependabot.yml) проверяет npm-зависимости еженедельно, а GitHub Actions — ежемесячно.
 
-```bash
-npm test -- --passWithNoTests && npm run lint
-```
+В **этом репозитории** CodeQL включён через GitHub default setup; отдельного workflow CodeQL в каталоге `.github/workflows/` нет. В новом репозитории, созданном из шаблона, настройки CodeQL необходимо проверить отдельно в **Settings → Security → Code security**.
 
-`--passWithNoTests` разрешает коммит, если тестовые файлы ещё не созданы.
-
-Если тесты существуют и хотя бы один из них падает, коммит будет остановлен. После тестов также выполняется ESLint.
-
-## CI
-
-Workflow `.github/workflows/node-ci.yml` запускается при:
-
-- `push` в `main`
-- `pull_request` в `main`
-
-Используется Node.js 26 и минимальное разрешение:
-
-```yaml
-permissions:
-  contents: read
-```
-
-Основные этапы CI:
-
-```text
-npm ci
-проверка наличия тестов
-npm run coverage   # только если тесты найдены
-npm run lint
-npm run prod
-```
-
-Перед запуском coverage workflow проверяет наличие тестов через:
-
-```bash
-npx jest --listTests
-```
-
-Если тестов нет, coverage пропускается. Если тесты есть, выполняется:
-
-```bash
-npm run coverage
-```
-
-и применяется установленный в Jest порог покрытия.
-
-Husky в GitHub Actions отключён через:
-
-```text
-HUSKY=0
-```
-
-поскольку необходимые проверки CI запускает самостоятельно.
-
-## Dependabot
-
-Dependabot автоматически проверяет обновления:
-
-- npm-зависимостей — **раз в неделю**
-- GitHub Actions — **раз в месяц**
-
-Конфигурация находится в:
-
-```text
-.github/dependabot.yml
-```
-
-## CodeQL
-
-CodeQL включён через **GitHub default setup**, поэтому отдельного CodeQL workflow в `.github/workflows/` нет.
-
-После создания нового репозитория из шаблона при необходимости проверьте настройку CodeQL в **Settings → Security → Code security**.
-
-## Структура
+## Структура проекта
 
 ```text
 .
@@ -189,7 +104,12 @@ CodeQL включён через **GitHub default setup**, поэтому отд
 ├── .husky/
 │   └── pre-commit
 ├── src/
-│   └── index.js
+│   ├── css/
+│   │   └── style.css
+│   ├── app.ts
+│   ├── global.d.ts
+│   ├── index.html
+│   └── index.ts
 ├── .browserslistrc
 ├── .editorconfig
 ├── .gitattributes
@@ -198,56 +118,23 @@ CodeQL включён через **GitHub default setup**, поэтому отд
 ├── babel.config.js
 ├── eslint.config.js
 ├── jest.config.js
+├── tsconfig.json
+├── tsconfig.webpack.json
+├── webpack.config.ts
 ├── package.json
 ├── package-lock.json
-├── webpack.config.js
 ├── LICENSE
 └── README.md
 ```
 
 ## Дополнительные настройки
 
-### `.gitignore`
-
-Из Git исключены:
-
-```text
-node_modules/
-dist/
-coverage/
-```
-
-### `.gitattributes`
-
-```gitattributes
-* text=auto
-```
-
-Git автоматически определяет текстовые файлы и нормализует окончания строк.
-
-### `.editorconfig`
-
-Для файлов используются:
-
-- UTF-8
-- отступ в 2 пробела
-- LF
-- финальный перенос строки
-
-### `.browserslistrc`
-
-```text
-defaults
-```
-
-### `.prettierignore`
-
-```text
-dist/
-```
-
-Директория сборки исключена из форматирования Prettier. Файл также используется расширением Prettier в VS Code.
+- `.gitignore` исключает `node_modules/`, `dist/` и `coverage/` из Git.
+- `.editorconfig` задаёт UTF-8, отступ в два пробела, LF и перевод строки в конце файла.
+- `.gitattributes` содержит `* text=auto` для автоматической нормализации текстовых файлов.
+- `.browserslistrc` использует значение `defaults`.
+- `.prettierignore` исключает `dist/` из форматирования.
 
 ## Лицензия
 
-MIT
+[MIT](LICENSE)
